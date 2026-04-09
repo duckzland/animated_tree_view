@@ -125,7 +125,9 @@ class TreeViewStateHelper<Data> {
             computeActualIndex(parentIndex + event.index, parentNode.level);
 
         animatedListStateController.insertAll(
-          actualIndex + 1,
+          // This is crude fix to ensure we can insert at index 0 for root.
+          // Best if upstream do fix the computeActualIndex func
+          parentNode.isRoot && actualIndex == 0 ? actualIndex : actualIndex + 1,
           List.from(event.items),
         );
       } else {

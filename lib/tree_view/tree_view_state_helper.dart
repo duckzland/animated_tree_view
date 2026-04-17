@@ -135,8 +135,11 @@ class TreeViewStateHelper<Data> {
           // index become -1 instead of 0
           // actualIndex,
 
-          // Trying natural for root only
-          parentNode.isRoot ? actualIndex : actualIndex + 1,
+          // Trying natural for root only, This doesnt work with inserting new node to root:0!
+          // parentNode.isRoot ? actualIndex : actualIndex + 1,
+
+          // Try to force to use 0 when inserting to root:0 and fallback to actualindex + 1 for everything else
+          parentNode.isRoot && event.index == 0 ? 0 : actualIndex + 1,
           List.from(event.items),
         );
       } else {
